@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { EmployService } from '../employ.service';
 
 @Component({
   selector: 'app-list',
@@ -7,40 +8,15 @@ import { NavigationExtras, Router } from '@angular/router';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  employees$ = this._employeesService.employees;
   navigationExtras: NavigationExtras = {
     state: {
       value: null
     }
   };
 
-  fakeData = [
-    {
-      name: 'Jose',
-      lastName: 'Pérez',
-      email: 'mperez@gmail.com',
-      startDate: '01/02/2021'
-    },
-    {
-      name: 'María',
-      lastName: 'Pérez',
-      email: 'mperez@gmail.com',
-      startDate: '01/02/2021'
-    },
-    {
-      name: 'Manuel',
-      lastName: 'Pérez',
-      email: 'mperez@gmail.com',
-      startDate: '01/02/2021'
-    },
-    {
-      name: 'Pedro',
-      lastName: 'Pérez',
-      email: 'mperez@gmail.com',
-      startDate: '01/02/2021'
-    }
-  ]
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _employeesService: EmployService) { }
 
   ngOnInit(): void {
   }

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "test-crud-employees": {
+      "hosting": {
+        "firebase": [
+          "test-crud-employees"
+        ]
+      }
+    }
+  }
+}

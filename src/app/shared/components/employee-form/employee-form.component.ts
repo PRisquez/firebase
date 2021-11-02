@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EmployService } from 'src/app/pages/employees/employ.service';
 import { Employee } from '../../models/employee.interface';
 
 @Component({
@@ -15,7 +16,7 @@ export class EmployeeFormComponent implements OnInit {
   employeeForm: FormGroup;
   private isEmail = /\S+@\S+\.\S+/;
 
-  constructor(private _router: Router, private _fb: FormBuilder) { 
+  constructor(private _router: Router, private _fb: FormBuilder, private _employeesService: EmployService) { 
     const navigation = this._router.getCurrentNavigation();
     this.employee = navigation?.extras?.state?.value;
     this.initForm();
@@ -31,6 +32,12 @@ export class EmployeeFormComponent implements OnInit {
 
   onSave(): void {
     console.log('Saved',  this.employeeForm.value);
+    if(this.employeeForm.valid){
+      const employee = this.employeeForm.value;
+      const employeeId = this.employee?.id || null;
+      this._employeesService.onSaveEmployee(employee, employeeId);
+      this.employeeForm.reset();
+    }
   }
 
   onGoBackToList(): void {
